@@ -1,4 +1,149 @@
 ---
+version: 1.0
+name: Mujahid-Motors-design-system
+description: |
+  Dark automotive editorial — deep charcoal canvas with warm amber-gold accent. Typography pairing: Barlow Condensed (compressed, athletic display) with DM Sans (clean, readable UI body). Color philosophy: near-monochrome dark canvas reserving all chromatic energy for the gold accent and image moments. Layout rhythm: full-bleed editorial hero → marquee ticker → fleet grid → trust pillars → testimonials → contact form → footer.
+
+colors:
+  canvas:         "#0D0D0D"
+  canvas-raised:  "#141414"
+  canvas-card:    "#1A1A1A"
+  canvas-border:  "#252525"
+  gold:           "#C8973A"
+  gold-light:     "#E0B060"
+  gold-dim:       "#8A6528"
+  gold-mist:      "rgba(200,151,58,0.12)"
+  gold-glow:      "rgba(200,151,58,0.25)"
+  text-primary:   "#F2EDE6"
+  text-secondary: "#A89C8C"
+  text-muted:     "#5C5248"
+  text-inverse:   "#0D0D0D"
+  success:        "#3D9970"
+  hairline:       "#2A2A2A"
+  hairline-soft:  "rgba(255,255,255,0.06)"
+
+typography:
+  display:
+    fontFamily: Barlow Condensed
+    fontWeight: 800
+    lineHeight: 0.92
+    letterSpacing: -0.01em
+    textTransform: uppercase
+    fontSize: clamp(64px, 10vw, 148px)
+  heading:
+    fontFamily: Barlow Condensed
+    fontWeight: 700
+    lineHeight: 1.1
+    letterSpacing: 0.01em
+    textTransform: uppercase
+  label:
+    fontFamily: DM Sans
+    fontWeight: 500
+    fontSize: 11px
+    letterSpacing: 0.12em
+    textTransform: uppercase
+    color: gold
+  body:
+    fontFamily: DM Sans
+    fontWeight: 400
+    fontSize: 16px
+    lineHeight: 1.65
+  body-strong:
+    fontFamily: DM Sans
+    fontWeight: 600
+    fontSize: 15px
+  caption:
+    fontFamily: DM Sans
+    fontSize: 12–13px
+    letterSpacing: 0.06em
+
+rounded:
+  none: 0px
+  sm:   4px
+  md:   8px
+  lg:   16px
+  xl:   24px
+  full: 9999px
+
+spacing:
+  xxs: 2px
+  xs:  4px
+  sm:  8px
+  md:  12px
+  lg:  18px
+  xl:  24px
+  xxl: 32px
+  sec: 56px
+
+components:
+  button-primary:
+    background: gold
+    color: text-inverse
+    borderRadius: full
+    padding: 14px 32px
+    fontSize: 14px
+    fontWeight: 600
+    letterSpacing: 0.06em
+    textTransform: uppercase
+    hover: gold-light + translateY(-1px) + gold-glow shadow
+  button-outline:
+    background: transparent
+    color: text-primary
+    border: 1px solid hairline
+    borderRadius: full
+    padding: 13px 32px
+    hover: border gold, color gold, translateY(-1px)
+  card:
+    background: canvas-card
+    border: 1px solid hairline
+    borderRadius: md
+    hover: border gold-dim, translateY(-4px)
+  nav:
+    height: 68px
+    background: transparent → rgba(13,13,13,0.88) on scroll
+    backdropFilter: blur(16px) on scroll
+    transition: hide-on-scroll-down, show-on-scroll-up
+
+sections:
+  - hero: Full-bleed dark canvas, 100svh, GSAP word-by-word entrance, parallax mouse-track on bg image, stats row, dual CTAs
+  - ticker: Infinite horizontal marquee of vehicle names + taglines, gold accent items
+  - fleet: 3-col responsive grid, car cards with image placeholder + spec pills + price + enquire CTA
+  - why-us: 4-pillar grid on hairline-bordered layout, large TRUST watermark background text, dual image band
+  - testimonials: Two-col layout — animated quote display left, nav list right, dot progress indicators
+  - contact: Two-col — copy + contact details left, enquiry form with interest tag pills right
+  - footer: 4-col grid, large ghost watermark wordmark at bottom
+
+animations:
+  scroll-smooth: Lenis 1.2s custom ease
+  hero-entrance: GSAP stagger word reveal (yPercent 110→0)
+  parallax-hero: GSAP mousemove x:±12px y:±8px on background
+  scroll-ticker: Framer Motion useAnimationFrame continuous x translation
+  section-reveal: Framer Motion whileInView fadeUp, once:true
+  testimonial-switch: AnimatePresence mode:wait slideY
+  card-hover: CSS translateY(-4px) + border-color transition
+  button-hover: translateY(-1px) + box-shadow gold-glow
+
+image-prompts:
+  hero: "Cinematic wide-angle shot of gleaming black luxury SUV on rain-slicked Lagos expressway at dusk, city lights reflecting off hood, warm amber streetlights, golden bokeh, atmospheric haze, low angle front-quarter view, ultra-wide f/2.8, photorealistic"
+  showroom: "Interior of bright Nigerian car dealership showroom — polished epoxy floor, premium vehicles on display, warm overhead lighting, professional salesperson with couple, modern minimalist architecture"
+  inspection: "Close-up of mechanic's gloved hands inspecting engine bay of Toyota Land Cruiser, clean workshop, workshop tools, shallow depth of field, warm lighting, photorealistic"
+  land-cruiser: "Studio 3/4 front view of white Toyota Land Cruiser 300 series on matte black seamless background, professional automotive photography, rim-lighting, ultra-sharp 8K"
+  gle-450: "Side profile of Obsidian Black Mercedes GLE 450 AMG on wet asphalt at night, city light reflections, cinematic grade, automotive editorial, f/2.8 bokeh"
+  lx-600: "Glamorous 3/4 rear view of Sonic Titanium Lexus LX 600 on desert dune at golden hour, dramatic sky, long shadow, low angle, photorealistic CGI quality"
+---
+
+# Mujahid Motors — Design System v1.0
+
+## Overview
+
+Dark automotive editorial aesthetic — the antithesis of generic Nigerian dealership websites. Canvas is near-black (`#0D0D0D`), carrying 95% of the surface area. All chromatic energy flows into a single warm amber-gold accent (`#C8973A`), which earns its presence by appearing only on key interaction points: CTAs, section labels, price displays, and micro-accents. This restraint makes every gold moment feel premium and deliberate.
+
+Typography uses extreme vertical contrast: **Barlow Condensed 800** at display scale (clamp 64–148px, line-height 0.92) creates architectural mass on the hero; **DM Sans** carries everything below it with clean readability.
+
+---
+
+<!-- Below: Original Nike design analysis preserved for reference -->
+---
 version: alpha
 name: Nike-design-analysis
 description: |

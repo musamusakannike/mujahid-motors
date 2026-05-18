@@ -1,26 +1,257 @@
 @import "tailwindcss";
 
+/* ─── Mujahid Motors Design System ─────────────────────────────────────── */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Canvas */
+  --mm-canvas:         #0D0D0D;
+  --mm-canvas-raised:  #141414;
+  --mm-canvas-card:    #1A1A1A;
+  --mm-canvas-border:  #252525;
+
+  /* Brand Gold */
+  --mm-gold:           #C8973A;
+  --mm-gold-light:     #E0B060;
+  --mm-gold-dim:       #8A6528;
+  --mm-gold-mist:      rgba(200,151,58,0.12);
+  --mm-gold-glow:      rgba(200,151,58,0.25);
+
+  /* Text */
+  --mm-text-primary:   #F2EDE6;
+  --mm-text-secondary: #A89C8C;
+  --mm-text-muted:     #5C5248;
+  --mm-text-inverse:   #0D0D0D;
+
+  /* Semantic */
+  --mm-success:        #3D9970;
+  --mm-hairline:       #2A2A2A;
+  --mm-hairline-soft:  rgba(255,255,255,0.06);
+
+  /* Spacing */
+  --mm-sp-xxs:  2px;
+  --mm-sp-xs:   4px;
+  --mm-sp-sm:   8px;
+  --mm-sp-md:   12px;
+  --mm-sp-lg:   18px;
+  --mm-sp-xl:   24px;
+  --mm-sp-xxl:  32px;
+  --mm-sp-sec:  56px;
+
+  /* Radius */
+  --mm-r-none: 0px;
+  --mm-r-sm:   4px;
+  --mm-r-md:   8px;
+  --mm-r-lg:   16px;
+  --mm-r-xl:   24px;
+  --mm-r-full: 9999px;
+
+  /* Transitions */
+  --mm-ease:      cubic-bezier(0.22, 1, 0.36, 1);
+  --mm-ease-in:   cubic-bezier(0.4, 0, 1, 1);
+  --mm-ease-out:  cubic-bezier(0, 0, 0.2, 1);
+  --mm-dur-fast:  180ms;
+  --mm-dur-base:  320ms;
+  --mm-dur-slow:  560ms;
+
+  /* Fonts */
+  --mm-font-display: var(--font-barlow), 'Barlow Condensed', sans-serif;
+  --mm-font-body:    var(--font-dm-sans), 'DM Sans', sans-serif;
 }
 
+/* ─── Tailwind v4 theme tokens ──────────────────────────────────────────── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-mm-canvas:        var(--mm-canvas);
+  --color-mm-canvas-raised: var(--mm-canvas-raised);
+  --color-mm-canvas-card:   var(--mm-canvas-card);
+  --color-mm-gold:          var(--mm-gold);
+  --color-mm-gold-light:    var(--mm-gold-light);
+  --color-mm-gold-dim:      var(--mm-gold-dim);
+  --color-mm-text:          var(--mm-text-primary);
+  --color-mm-text-sec:      var(--mm-text-secondary);
+  --color-mm-text-muted:    var(--mm-text-muted);
+  --color-mm-hairline:      var(--mm-hairline);
+  --font-display:           var(--mm-font-display);
+  --font-body:              var(--mm-font-body);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Base reset ────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--mm-canvas);
+  color: var(--mm-text-primary);
+  font-family: var(--mm-font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ─── Typography utilities ──────────────────────────────────────────────── */
+.mm-display {
+  font-family: var(--mm-font-display);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.mm-heading {
+  font-family: var(--mm-font-display);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.mm-label {
+  font-family: var(--mm-font-body);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mm-gold);
+}
+
+/* ─── Gold accent line ──────────────────────────────────────────────────── */
+.mm-accent-line {
+  display: inline-block;
+  width: 40px;
+  height: 2px;
+  background: var(--mm-gold);
+  border-radius: 1px;
+}
+
+/* ─── Button system ─────────────────────────────────────────────────────── */
+.mm-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--mm-gold);
+  color: var(--mm-text-inverse);
+  font-family: var(--mm-font-body);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  border-radius: var(--mm-r-full);
+  border: none;
+  cursor: pointer;
+  transition: background var(--mm-dur-base) var(--mm-ease),
+              transform var(--mm-dur-fast) var(--mm-ease),
+              box-shadow var(--mm-dur-base) var(--mm-ease);
+  will-change: transform;
+}
+
+.mm-btn-primary:hover {
+  background: var(--mm-gold-light);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 32px var(--mm-gold-glow);
+}
+
+.mm-btn-primary:active {
+  transform: scale(0.97);
+}
+
+.mm-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--mm-text-primary);
+  font-family: var(--mm-font-body);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 13px 32px;
+  border-radius: var(--mm-r-full);
+  border: 1px solid var(--mm-hairline);
+  cursor: pointer;
+  transition: border-color var(--mm-dur-base) var(--mm-ease),
+              color var(--mm-dur-base) var(--mm-ease),
+              transform var(--mm-dur-fast) var(--mm-ease);
+}
+
+.mm-btn-outline:hover {
+  border-color: var(--mm-gold);
+  color: var(--mm-gold);
+  transform: translateY(-1px);
+}
+
+/* ─── Card base ─────────────────────────────────────────────────────────── */
+.mm-card {
+  background: var(--mm-canvas-card);
+  border: 1px solid var(--mm-hairline);
+  border-radius: var(--mm-r-md);
+  overflow: hidden;
+  transition: border-color var(--mm-dur-base) var(--mm-ease),
+              transform var(--mm-dur-slow) var(--mm-ease);
+}
+
+.mm-card:hover {
+  border-color: var(--mm-gold-dim);
+  transform: translateY(-4px);
+}
+
+/* ─── Image placeholder ─────────────────────────────────────────────────── */
+.mm-img-placeholder {
+  background: var(--mm-canvas-raised);
+  position: relative;
+  overflow: hidden;
+}
+
+.mm-img-placeholder::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 30%,
+    rgba(200,151,58,0.04) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  animation: mm-shimmer 2.4s ease-in-out infinite;
+}
+
+@keyframes mm-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ─── Divider ───────────────────────────────────────────────────────────── */
+.mm-divider {
+  height: 1px;
+  background: var(--mm-hairline);
+}
+
+/* ─── Scroll fade-in utility (driven by Framer Motion / GSAP) ─────────── */
+.mm-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+/* ─── Custom scrollbar ──────────────────────────────────────────────────── */
+::-webkit-scrollbar        { width: 4px; }
+::-webkit-scrollbar-track  { background: var(--mm-canvas); }
+::-webkit-scrollbar-thumb  { background: var(--mm-gold-dim); border-radius: 2px; }
+
+/* ─── Selection ─────────────────────────────────────────────────────────── */
+::selection {
+  background: var(--mm-gold-mist);
+  color: var(--mm-gold-light);
 }
