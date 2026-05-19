@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import gsap from "gsap";
@@ -95,7 +96,7 @@ export default function Hero() {
         background: "var(--mm-canvas)",
       }}
     >
-      {/* Background hero image placeholder */}
+      {/* Background hero image */}
       <div
         ref={imgRef}
         className="mm-img-placeholder"
@@ -106,6 +107,14 @@ export default function Hero() {
         }}
         title="[IMAGE PROMPT: Cinematic wide-angle shot of a gleaming black luxury SUV (e.g., Range Rover or Lexus LX) parked on a rain-slicked Lagos expressway at dusk, city lights reflecting off the hood, warm amber streetlights creating golden bokeh, atmospheric haze in background, shot from low angle at front-quarter view, ultra-wide lens, f/2.8, photorealistic]"
       >
+        <Image
+          src="/lexus-lx.png"
+          alt="Mujahid Motors premium SUV"
+          fill
+          priority
+          sizes="100vw"
+          style={{ objectFit: "cover" }}
+        />
         {/* Gradient overlays */}
         <div
           style={{
@@ -125,30 +134,7 @@ export default function Hero() {
             zIndex: 1,
           }}
         />
-        {/* Placeholder indicator */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            zIndex: 0,
-          }}
-        >
-          <span
-            style={{
-              fontFamily: "var(--mm-font-body)",
-              fontSize: 12,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              color: "var(--mm-text-muted)",
-              opacity: 0.5,
-            }}
-          >
-            Hero Image — see title attribute for prompt
-          </span>
-        </div>
+        {/* Placeholder indicator removed once image is provided */}
       </div>
 
       {/* Noise grain overlay */}

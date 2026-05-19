@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
@@ -13,6 +14,7 @@ const CARS = [
     tag: "New Arrival",
     tagColor: "var(--mm-gold)",
     specs: ["4.5L V8 Diesel", "7-Seater", "4WD"],
+    imageSrc: "/toyota-land-cruiser.png",
     imgPrompt:
       "[IMAGE PROMPT: Studio 3/4 front view of a white Toyota Land Cruiser 300 series on a matte black seamless studio background, professional automotive photography, rim-lighting, sharp reflections, ultra-sharp, 8K]",
   },
@@ -25,6 +27,7 @@ const CARS = [
     tag: "Pre-Owned",
     tagColor: "var(--mm-text-secondary)",
     specs: ["3.0L Inline-6", "5-Seater", "4MATIC"],
+    imageSrc: "/gle-450-amg.png",
     imgPrompt:
       "[IMAGE PROMPT: Side profile of a Obsidian Black Mercedes GLE 450 AMG on wet asphalt at night, city lights reflecting on the body, cinematic colour grade, automotive editorial, f/2.8 bokeh background]",
   },
@@ -37,6 +40,7 @@ const CARS = [
     tag: "Premium",
     tagColor: "var(--mm-gold)",
     specs: ["3.4L Twin-Turbo V6", "7-Seater", "AWD"],
+    imageSrc: "/titanium-lx-600.png",
     imgPrompt:
       "[IMAGE PROMPT: Glamorous 3/4 rear view of a Sonic Titanium Lexus LX 600 on a desert dune at golden hour, dramatic sky, long shadow, low angle, photorealistic automotive CGI quality]",
   },
@@ -126,26 +130,37 @@ function CarCard({ car, index }: { car: (typeof CARS)[number]; index: number }) 
         >
           {car.tag}
         </span>
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <span
+        {car.imageSrc ? (
+          <Image
+            src={car.imageSrc}
+            alt={`${car.brand} ${car.model}`}
+            fill
+            sizes="(max-width: 768px) 100vw, 33vw"
+            style={{ objectFit: "cover" }}
+            priority={car.id <= 2}
+          />
+        ) : (
+          <div
             style={{
-              fontFamily: "var(--mm-font-body)",
-              fontSize: 11,
-              color: "var(--mm-text-muted)",
-              letterSpacing: "0.06em",
+              position: "absolute",
+              inset: 0,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
-            {car.brand} · hover title for image prompt
-          </span>
-        </div>
+            <span
+              style={{
+                fontFamily: "var(--mm-font-body)",
+                fontSize: 11,
+                color: "var(--mm-text-muted)",
+                letterSpacing: "0.06em",
+              }}
+            >
+              {car.brand} · hover title for image prompt
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Content */}
