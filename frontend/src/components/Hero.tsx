@@ -108,7 +108,7 @@ export default function Hero() {
         title="[IMAGE PROMPT: Cinematic wide-angle shot of a gleaming black luxury SUV (e.g., Range Rover or Lexus LX) parked on a rain-slicked Lagos expressway at dusk, city lights reflecting off the hood, warm amber streetlights creating golden bokeh, atmospheric haze in background, shot from low angle at front-quarter view, ultra-wide lens, f/2.8, photorealistic]"
       >
         <Image
-          src="/lexus-lx.png"
+          src="/lexus-lx.jpg"
           alt="Mujahid Motors premium SUV"
           fill
           priority

@@ -204,7 +204,7 @@ export default function WhyUs() {
             style={{ height: 280, borderRadius: "var(--mm-r-md)", overflow: "hidden" }}
           >
             <img
-              src="/showroom-interior.png"
+              src="/showroom-interior.jpg"
               alt="Showroom Interior"
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
             />
@@ -213,7 +213,7 @@ export default function WhyUs() {
             style={{ height: 280, borderRadius: "var(--mm-r-md)", overflow: "hidden" }}
           >
             <img
-              src="/car-inspection.png"
+              src="/car-inspection.jpg"
               alt="Car Inspection"
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
             />

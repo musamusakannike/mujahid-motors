@@ -14,7 +14,7 @@ const CARS = [
     tag: "New Arrival",
     tagColor: "var(--mm-gold)",
     specs: ["4.5L V8 Diesel", "7-Seater", "4WD"],
-    imageSrc: "/toyota-land-cruiser.png",
+    imageSrc: "/toyota-land-cruiser.jpg",
     imgPrompt:
       "[IMAGE PROMPT: Studio 3/4 front view of a white Toyota Land Cruiser 300 series on a matte black seamless studio background, professional automotive photography, rim-lighting, sharp reflections, ultra-sharp, 8K]",
   },
@@ -27,7 +27,7 @@ const CARS = [
     tag: "Pre-Owned",
     tagColor: "var(--mm-text-secondary)",
     specs: ["3.0L Inline-6", "5-Seater", "4MATIC"],
-    imageSrc: "/gle-450-amg.png",
+    imageSrc: "/gle-450-amg.jpg",
     imgPrompt:
       "[IMAGE PROMPT: Side profile of a Obsidian Black Mercedes GLE 450 AMG on wet asphalt at night, city lights reflecting on the body, cinematic colour grade, automotive editorial, f/2.8 bokeh background]",
   },
@@ -40,7 +40,7 @@ const CARS = [
     tag: "Premium",
     tagColor: "var(--mm-gold)",
     specs: ["3.4L Twin-Turbo V6", "7-Seater", "AWD"],
-    imageSrc: "/titanium-lx-600.png",
+    imageSrc: "/titanium-lx-600.jpg",
     imgPrompt:
       "[IMAGE PROMPT: Glamorous 3/4 rear view of a Sonic Titanium Lexus LX 600 on a desert dune at golden hour, dramatic sky, long shadow, low angle, photorealistic automotive CGI quality]",
   },
@@ -65,7 +65,7 @@ const CARS = [
     tag: "Off-Road Ready",
     tagColor: "var(--mm-text-secondary)",
     specs: ["3.0L V6 EcoBoost", "5-Seater", "4WD"],
-    imageSrc: "/ford-midair.png",
+    imageSrc: "/ford-midair.jpg",
     imgPrompt:
       "[IMAGE PROMPT: Dynamic angled shot of a Performance Blue Ford Ranger Raptor mid-jump on a dusty off-road track, motion blur on wheels, dust cloud behind, dramatic low angle, golden afternoon light, action automotive photography]",
   },
@@ -78,7 +78,7 @@ const CARS = [
     tag: "Best Value",
     tagColor: "var(--mm-success)",
     specs: ["3.8L V6", "8-Seater", "AWD"],
-    imageSrc: "/hyundai-palisade.png",
+    imageSrc: "/hyundai-palisade.jpg",
     imgPrompt:
       "[IMAGE PROMPT: Head-on symmetrical shot of an Abyss Black Hyundai Palisade Calligraphy in a modern showroom with reflective floor, dramatic overhead lighting, high-end automotive studio photography]",
   },
