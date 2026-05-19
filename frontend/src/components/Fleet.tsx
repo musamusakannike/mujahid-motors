@@ -65,6 +65,7 @@ const CARS = [
     tag: "Off-Road Ready",
     tagColor: "var(--mm-text-secondary)",
     specs: ["3.0L V6 EcoBoost", "5-Seater", "4WD"],
+    imageSrc: "/ford-midair.png",
     imgPrompt:
       "[IMAGE PROMPT: Dynamic angled shot of a Performance Blue Ford Ranger Raptor mid-jump on a dusty off-road track, motion blur on wheels, dust cloud behind, dramatic low angle, golden afternoon light, action automotive photography]",
   },
@@ -77,6 +78,7 @@ const CARS = [
     tag: "Best Value",
     tagColor: "var(--mm-success)",
     specs: ["3.8L V6", "8-Seater", "AWD"],
+    imageSrc: "/hyundai-palisade.png",
     imgPrompt:
       "[IMAGE PROMPT: Head-on symmetrical shot of an Abyss Black Hyundai Palisade Calligraphy in a modern showroom with reflective floor, dramatic overhead lighting, high-end automotive studio photography]",
   },

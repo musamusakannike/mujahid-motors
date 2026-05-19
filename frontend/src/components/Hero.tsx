@@ -169,7 +169,9 @@ export default function Hero() {
           style={{ marginBottom: 28, display: "flex", alignItems: "center", gap: 12 }}
         >
           <span className="mm-accent-line" />
-          <span className="mm-label">Lagos, Nigeria · Est. 2012</span>
+          <span className="mm-label" style={{ textShadow: "var(--mm-shadow-text-sm)" }}>
+            Lagos, Nigeria · Est. 2012
+          </span>
         </motion.div>
 
         {/* Headline */}
@@ -193,7 +195,11 @@ export default function Hero() {
                 <span
                   key={i}
                   className="hero-word"
-                  style={{ display: "inline-block", opacity: 0 }}
+                  style={{ 
+                    display: "inline-block", 
+                    opacity: 0,
+                    textShadow: "var(--mm-shadow-text-lg)",
+                  }}
                 >
                   {char}
                 </span>
@@ -209,7 +215,14 @@ export default function Hero() {
               color: "transparent",
             }}
           >
-            <span className="hero-word" style={{ display: "inline-block", opacity: 0 }}>
+            <span 
+              className="hero-word" 
+              style={{ 
+                display: "inline-block", 
+                opacity: 0,
+                textShadow: "var(--mm-shadow-text-lg)",
+              }}
+            >
               Beyond.
             </span>
           </h1>
@@ -227,6 +240,7 @@ export default function Hero() {
             marginTop: 32,
             marginBottom: 48,
             opacity: 0,
+            textShadow: "var(--mm-shadow-text-md)",
           }}
         >
           Nigeria&apos;s curated destination for premium vehicles — new, certified
@@ -259,7 +273,12 @@ export default function Hero() {
             <div key={s.label} className="hero-stat" style={{ opacity: 0 }}>
               <div
                 className="mm-heading"
-                style={{ fontSize: 32, color: "var(--mm-gold)", lineHeight: 1 }}
+                style={{ 
+                  fontSize: 32, 
+                  color: "var(--mm-gold)", 
+                  lineHeight: 1,
+                  textShadow: "var(--mm-shadow-text-sm)",
+                }}
               >
                 {s.value}
               </div>
@@ -270,6 +289,7 @@ export default function Hero() {
                   color: "var(--mm-text-muted)",
                   marginTop: 4,
                   letterSpacing: "0.04em",
+                  textShadow: "var(--mm-shadow-text-sm)",
                 }}
               >
                 {s.label}
@@ -303,6 +323,7 @@ export default function Hero() {
             textTransform: "uppercase",
             color: "var(--mm-text-muted)",
             writingMode: "vertical-rl",
+            textShadow: "var(--mm-shadow-text-sm)",
           }}
         >
           Scroll

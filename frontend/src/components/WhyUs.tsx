@@ -119,7 +119,7 @@ export default function WhyUs() {
               marginTop: 20,
             }}
           >
-            Over a decade serving Lagos, we've built our reputation one handshake at a time.
+            Over a decade serving Lagos, we&apos;ve built our reputation one handshake at a time.
           </motion.p>
         </div>
 
