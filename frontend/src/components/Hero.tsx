@@ -121,7 +121,7 @@ export default function Hero() {
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(to top, rgba(13,13,13,1) 0%, rgba(13,13,13,0.7) 30%, rgba(13,13,13,0.2) 60%, rgba(13,13,13,0.05) 100%)",
+              "linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.7) 30%, rgba(255,255,255,0.2) 60%, rgba(255,255,255,0.05) 100%)",
             zIndex: 1,
           }}
         />
@@ -130,7 +130,7 @@ export default function Hero() {
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(to right, rgba(13,13,13,0.6) 0%, transparent 50%)",
+              "linear-gradient(to right, rgba(255,255,255,0.6) 0%, transparent 50%)",
             zIndex: 1,
           }}
         />

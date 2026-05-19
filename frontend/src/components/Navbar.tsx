@@ -48,7 +48,7 @@ export default function Navbar() {
             ? "1px solid var(--mm-hairline)"
             : "1px solid transparent",
           background: scrolled
-            ? "rgba(13,13,13,0.88)"
+            ? "rgba(255,255,255,0.88)"
             : "transparent",
           backdropFilter: scrolled ? "blur(16px)" : "none",
           WebkitBackdropFilter: scrolled ? "blur(16px)" : "none",

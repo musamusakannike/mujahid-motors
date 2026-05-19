@@ -122,7 +122,7 @@ function CarCard({ car, index }: { car: (typeof CARS)[number]; index: number }) 
             letterSpacing: "0.08em",
             textTransform: "uppercase",
             color: car.tagColor,
-            background: "rgba(13,13,13,0.75)",
+            background: "rgba(255,255,255,0.75)",
             border: `1px solid ${car.tagColor}`,
             borderRadius: "var(--mm-r-full)",
             padding: "4px 10px",
