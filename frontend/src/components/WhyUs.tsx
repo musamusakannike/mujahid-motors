@@ -201,26 +201,22 @@ export default function WhyUs() {
           className="why-image-grid"
         >
           <div
-            className="mm-img-placeholder"
-            style={{ height: 280, borderRadius: "var(--mm-r-md)" }}
-            title="[IMAGE PROMPT: Interior shot of a bright Nigerian car dealership showroom — polished epoxy floor, several premium vehicles on display, warm overhead lighting, a salesperson in a smart blazer conversing with a couple, modern minimalist architecture, professional photography]"
+            style={{ height: 280, borderRadius: "var(--mm-r-md)", overflow: "hidden" }}
           >
-            <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <span style={{ fontFamily: "var(--mm-font-body)", fontSize: 11, color: "var(--mm-text-muted)", letterSpacing: "0.06em" }}>
-                Showroom Interior · See title for image prompt
-              </span>
-            </div>
+            <img
+              src="/showroom-interior.png"
+              alt="Showroom Interior"
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
           </div>
           <div
-            className="mm-img-placeholder"
-            style={{ height: 280, borderRadius: "var(--mm-r-md)" }}
-            title="[IMAGE PROMPT: Close-up of a car mechanic's hands in latex gloves inspecting the engine bay of a Toyota Land Cruiser, clean workshop environment, workshop tools in background, shallow depth of field, warm lighting, photorealistic]"
+            style={{ height: 280, borderRadius: "var(--mm-r-md)", overflow: "hidden" }}
           >
-            <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <span style={{ fontFamily: "var(--mm-font-body)", fontSize: 11, color: "var(--mm-text-muted)", letterSpacing: "0.06em" }}>
-                Inspection · See title for image prompt
-              </span>
-            </div>
+            <img
+              src="/car-inspection.png"
+              alt="Car Inspection"
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
           </div>
         </motion.div>
       </div>
