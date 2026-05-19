@@ -1,83 +1,29 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
-import gsap from "gsap";
-
-const STATS = [
-  { value: "500+", label: "Vehicles Sold" },
-  { value: "12yr", label: "In Business" },
-  { value: "98%", label: "Client Satisfaction" },
-];
+import { useEffect, useRef, useState } from "react";
+import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const imgRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springX = useSpring(mouseX, { stiffness: 40, damping: 25 });
+  const springY = useSpring(mouseY, { stiffness: 40, damping: 25 });
+
+  const bgX = useTransform(springX, [-1, 1], ["-1.5%", "1.5%"]);
+  const bgY = useTransform(springY, [-1, 1], ["-1%", "1%"]);
 
   useEffect(() => {
-    if (!containerRef.current) return;
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        ".hero-word",
-        { yPercent: 110, opacity: 0 },
-        {
-          yPercent: 0,
-          opacity: 1,
-          duration: 1.1,
-          stagger: 0.1,
-          ease: "power4.out",
-          delay: 0.2,
-        }
-      );
-      gsap.fromTo(
-        ".hero-sub",
-        { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.9, ease: "power3.out", delay: 0.85 }
-      );
-      gsap.fromTo(
-        ".hero-cta",
-        { opacity: 0, y: 12 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          stagger: 0.1,
-          ease: "power3.out",
-          delay: 1.0,
-        }
-      );
-      gsap.fromTo(
-        ".hero-stat",
-        { opacity: 0, y: 10 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          stagger: 0.1,
-          ease: "power3.out",
-          delay: 1.2,
-        }
-      );
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  useEffect(() => {
-    if (!imgRef.current) return;
+    setMounted(true);
     const handleMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e;
       const cx = window.innerWidth / 2;
       const cy = window.innerHeight / 2;
-      const dx = (clientX - cx) / cx;
-      const dy = (clientY - cy) / cy;
-      gsap.to(imgRef.current, {
-        x: dx * 12,
-        y: dy * 8,
-        duration: 1.4,
-        ease: "power2.out",
-      });
+      mouseX.set((e.clientX - cx) / cx);
+      mouseY.set((e.clientY - cy) / cy);
     };
     window.addEventListener("mousemove", handleMove);
     return () => window.removeEventListener("mousemove", handleMove);
@@ -88,196 +34,172 @@ export default function Hero() {
       ref={containerRef}
       style={{
         position: "relative",
-        minHeight: "100svh",
+        height: "100svh",
+        width: "100%",
+        overflow: "hidden",
+        background: "#0D0D0D",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "flex-end",
-        overflow: "hidden",
-        background: "var(--mm-canvas)",
+        alignItems: "center",
+        justifyContent: "space-between",
       }}
     >
-      {/* Background hero image */}
-      <div
-        ref={imgRef}
-        className="mm-img-placeholder"
+      {/* Full-bleed vehicle image with parallax */}
+      <motion.div
         style={{
           position: "absolute",
-          inset: "-5%",
+          inset: "-3%",
+          x: bgX,
+          y: bgY,
           zIndex: 0,
         }}
-        title="[IMAGE PROMPT: Cinematic wide-angle shot of a gleaming black luxury SUV (e.g., Range Rover or Lexus LX) parked on a rain-slicked Lagos expressway at dusk, city lights reflecting off the hood, warm amber streetlights creating golden bokeh, atmospheric haze in background, shot from low angle at front-quarter view, ultra-wide lens, f/2.8, photorealistic]"
       >
         <Image
-          src="/lexus-lx.jpg"
-          alt="Mujahid Motors premium SUV"
+          src="/hero.png"
+          alt="Mujahid Motors premium vehicle"
           fill
           priority
           sizes="100vw"
-          style={{ objectFit: "cover" }}
+          style={{ objectFit: "cover", objectPosition: "center 55%" }}
         />
-        {/* Gradient overlays */}
+        {/* Very subtle darkening only at top and bottom edges */}
         <div
           style={{
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.7) 30%, rgba(255,255,255,0.2) 60%, rgba(255,255,255,0.05) 100%)",
+              "linear-gradient(to bottom, rgba(13,13,13,0.45) 0%, transparent 22%, transparent 65%, rgba(13,13,13,0.55) 100%)",
             zIndex: 1,
           }}
         />
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(to right, rgba(255,255,255,0.6) 0%, transparent 50%)",
-            zIndex: 1,
-          }}
-        />
-        {/* Placeholder indicator removed once image is provided */}
-      </div>
+      </motion.div>
 
-      {/* Noise grain overlay */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          zIndex: 1,
-          opacity: 0.025,
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-          backgroundSize: "200px 200px",
-          pointerEvents: "none",
-        }}
-      />
-
-      {/* Content */}
-      <div
+      {/* TOP: wordmark / model name */}
+      <motion.div
+        initial={{ opacity: 0, y: -8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
         style={{
           position: "relative",
           zIndex: 2,
-          maxWidth: 1400,
-          margin: "0 auto",
-          padding: "0 32px 80px",
+          paddingTop: "clamp(36px, 6vh, 64px)",
+          textAlign: "center",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 6,
+        }}
+      >
+        <p
+          style={{
+            fontFamily: "var(--mm-font-label)",
+            fontSize: 11,
+            letterSpacing: "0.22em",
+            textTransform: "uppercase",
+            color: "var(--mm-gold)",
+            margin: 0,
+          }}
+        >
+          Mujahid Motors · Lagos
+        </p>
+        <h1
+          className="mm-display"
+          style={{
+            fontSize: "clamp(52px, 7vw, 96px)",
+            color: "var(--mm-text-primary)",
+            margin: 0,
+            lineHeight: 0.9,
+            letterSpacing: "-0.01em",
+          }}
+        >
+          Drive Beyond.
+        </h1>
+      </motion.div>
+
+      {/* BOTTOM: CTAs + subtle stat strip */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.35 }}
+        style={{
+          position: "relative",
+          zIndex: 2,
+          paddingBottom: "clamp(32px, 5vh, 56px)",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 20,
           width: "100%",
         }}
       >
-        {/* Label */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.1 }}
-          style={{ marginBottom: 28, display: "flex", alignItems: "center", gap: 12 }}
-        >
-          <span className="mm-accent-line" />
-          <span className="mm-label" style={{ textShadow: "var(--mm-shadow-text-sm)" }}>
-            Lagos, Nigeria · Est. 2012
-          </span>
-        </motion.div>
-
-        {/* Headline */}
-        <div
-          style={{
-            overflow: "hidden",
-            marginBottom: 4,
-          }}
-        >
-          <h1
-            className="mm-display"
-            style={{
-              fontSize: "clamp(64px, 10vw, 148px)",
-              color: "var(--mm-text-primary)",
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "0 0.2em",
-            }}
-          >
-            {"Drive".split("").map((char, i) => (
-                <span
-                  key={i}
-                  className="hero-word"
-                  style={{ 
-                    display: "inline-block", 
-                    opacity: 0,
-                    textShadow: "var(--mm-shadow-text-lg)",
-                  }}
-                >
-                  {char}
-                </span>
-              ))}
-          </h1>
-        </div>
-        <div style={{ overflow: "hidden", marginBottom: 4 }}>
-          <h1
-            className="mm-display"
-            style={{
-              fontSize: "clamp(64px, 10vw, 148px)",
-              WebkitTextStroke: "1px var(--mm-text-muted)",
-              color: "transparent",
-            }}
-          >
-            <span 
-              className="hero-word" 
-              style={{ 
-                display: "inline-block", 
-                opacity: 0,
-                textShadow: "var(--mm-shadow-text-lg)",
-              }}
-            >
-              Beyond.
-            </span>
-          </h1>
-        </div>
-
-        {/* Sub-headline */}
+        {/* Optional sub-label */}
         <p
-          className="hero-sub"
           style={{
             fontFamily: "var(--mm-font-body)",
-            fontSize: "clamp(15px, 1.8vw, 18px)",
-            color: "var(--mm-text-secondary)",
-            maxWidth: 480,
-            lineHeight: 1.65,
-            marginTop: 32,
-            marginBottom: 48,
-            opacity: 0,
-            textShadow: "var(--mm-shadow-text-md)",
+            fontSize: "clamp(13px, 1.4vw, 15px)",
+            color: "rgba(242,237,230,0.72)",
+            margin: 0,
+            letterSpacing: "0.02em",
           }}
         >
-          Nigeria&apos;s curated destination for premium vehicles — new, certified
-          pre-owned, and trade-in ready. Transparent pricing. No surprises.
+          Premium vehicles. Transparent pricing. No surprises.
         </p>
 
-        {/* CTAs */}
-        <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginBottom: 72 }}>
-          <a href="#fleet" className="mm-btn-primary hero-cta" style={{ opacity: 0 }}
-            onClick={(e) => { e.preventDefault(); document.querySelector("#fleet")?.scrollIntoView({ behavior: "smooth" }); }}>
+        {/* CTA row — Tesla-style side-by-side pills */}
+        <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
+          <a
+            href="#fleet"
+            className="mm-btn-primary"
+            onClick={(e) => {
+              e.preventDefault();
+              document.querySelector("#fleet")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            style={{ minWidth: 180, textAlign: "center" }}
+          >
             Explore Fleet
           </a>
-          <a href="#contact" className="mm-btn-outline hero-cta" style={{ opacity: 0 }}
-            onClick={(e) => { e.preventDefault(); document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }); }}>
+          <a
+            href="#contact"
+            className="mm-btn-outline"
+            onClick={(e) => {
+              e.preventDefault();
+              document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            style={{
+              minWidth: 180,
+              textAlign: "center",
+              /* Frosted glass feel on dark bg */
+              background: "rgba(255,255,255,0.08)",
+              backdropFilter: "blur(12px)",
+              WebkitBackdropFilter: "blur(12px)",
+              borderColor: "rgba(255,255,255,0.22)",
+            }}
+          >
             Book a Viewing
           </a>
         </div>
 
-        {/* Stats row */}
+        {/* Stat strip */}
         <div
           style={{
             display: "flex",
-            gap: 48,
-            flexWrap: "wrap",
-            paddingTop: 32,
-            borderTop: "1px solid var(--mm-hairline)",
+            gap: "clamp(24px, 5vw, 64px)",
+            alignItems: "center",
+            marginTop: 4,
           }}
         >
-          {STATS.map((s) => (
-            <div key={s.label} className="hero-stat" style={{ opacity: 0 }}>
+          {[
+            { value: "500+", label: "Vehicles Sold" },
+            { value: "12yr", label: "In Business" },
+            { value: "98%", label: "Satisfaction" },
+          ].map((s, i) => (
+            <div key={s.label} style={{ textAlign: "center" }}>
               <div
                 className="mm-heading"
-                style={{ 
-                  fontSize: 32, 
-                  color: "var(--mm-gold)", 
+                style={{
+                  fontSize: "clamp(20px, 2.4vw, 28px)",
+                  color: "var(--mm-gold)",
                   lineHeight: 1,
-                  textShadow: "var(--mm-shadow-text-sm)",
                 }}
               >
                 {s.value}
@@ -285,11 +207,11 @@ export default function Hero() {
               <div
                 style={{
                   fontFamily: "var(--mm-font-body)",
-                  fontSize: 13,
-                  color: "var(--mm-text-muted)",
+                  fontSize: 11,
+                  color: "rgba(242,237,230,0.5)",
                   marginTop: 4,
-                  letterSpacing: "0.04em",
-                  textShadow: "var(--mm-shadow-text-sm)",
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
                 }}
               >
                 {s.label}
@@ -297,47 +219,44 @@ export default function Hero() {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
 
-      {/* Scroll hint */}
+      {/* Scroll chevron — centered, pulsing */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 1 }}
+        transition={{ delay: 1.8, duration: 1 }}
         style={{
           position: "absolute",
-          bottom: 32,
-          right: 40,
+          bottom: "clamp(80px, 10vh, 110px)",
+          left: "50%",
+          transform: "translateX(-50%)",
           zIndex: 2,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          gap: 8,
         }}
       >
-        <span
-          style={{
-            fontFamily: "var(--mm-font-body)",
-            fontSize: 10,
-            letterSpacing: "0.14em",
-            textTransform: "uppercase",
-            color: "var(--mm-text-muted)",
-            writingMode: "vertical-rl",
-            textShadow: "var(--mm-shadow-text-sm)",
-          }}
-        >
-          Scroll
-        </span>
         <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
-          style={{
-            width: 1,
-            height: 40,
-            background: "var(--mm-gold)",
-            borderRadius: 1,
-          }}
-        />
+          animate={{ y: [0, 7, 0] }}
+          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+        >
+          <svg
+            width="20"
+            height="12"
+            viewBox="0 0 20 12"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M1 1L10 10L19 1"
+              stroke="var(--mm-gold)"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </motion.div>
       </motion.div>
     </section>
   );
